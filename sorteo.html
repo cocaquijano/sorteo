@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteo de 5 Ganadores</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .result { margin-top: 20px; }
+        .winner { color: green; }
+        .loser { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Participa en el Sorteo</h1>
+    <form id="raffle-form">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" required><br><br>
+        <label for="surname">Apellido:</label>
+        <input type="text" id="surname" required><br><br>
+        <label for="phone">Teléfono:</label>
+        <input type="tel" id="phone" required><br><br>
+        <button type="submit">Participar</button>
+    </form>
+    <div class="result" id="result"></div>
+
+    <script>
+        // Lista de ganadores (puedes cambiar esta lógica)
+        const winners = [
+            { name: "Ganador 1", surname: "Apellido 1" },
+            { name: "Ganador 2", surname: "Apellido 2" },
+            { name: "Ganador 3", surname: "Apellido 3" },
+            { name: "Ganador 4", surname: "Apellido 4" },
+            { name: "Ganador 5", surname: "Apellido 5" }
+        ];
+
+        document.getElementById('raffle-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario
+            const name = document.getElementById('name').value;
+            const surname = document.getElementById('surname').value;
+            const resultDiv = document.getElementById('result');
+
+            // Verificar si el participante es un ganador
+            const isWinner = winners.some(winner => winner.name === name && winner.surname === surname);
+
+            // Mostrar resultado
+            if (isWinner) {
+                resultDiv.innerHTML = `<p class="winner">¡Felicidades, ${name} ${surname}! Has ganado.</p>`;
+            } else {
+                resultDiv.innerHTML = `<p class="loser">Lo siento, ${name} ${surname}. No has ganado esta vez.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
